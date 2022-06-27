@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1114e44e133e16648903893b6cd86bf8, type: 3}
+  m_Name: FireballAnimatorConfigs
+  m_EditorClassIdentifier: 
+  Sequence:
+  - Track: 2
+    Sprites:
+    - {fileID: 21300000, guid: c8307a4528f7acd4f8fd04dad4794113, type: 3}
+    - {fileID: 21300000, guid: 4c7f18f1274f4084d98959dd8fa5b0f5, type: 3}
+    - {fileID: 21300000, guid: e12def1f392e15740bf167c1e2512f53, type: 3}
+    - {fileID: 21300000, guid: 05270ae50883518448c456db9c8d82b8, type: 3}
