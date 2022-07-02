@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3115545208649521058}
   - component: {fileID: 3115545208649521061}
+  - component: {fileID: 3115545208649521060}
   - component: {fileID: 3115545208649521063}
   - component: {fileID: 3115545208649521062}
-  - component: {fileID: 3036570629957418199}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -85,6 +85,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3115545208649521060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3115545208649521065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3784ade2c5429ba076e2b38bf53b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Transform: {fileID: 3115545208649521058}
+  SpriteRenderer: {fileID: 3115545208649521061}
+  Collider2D: {fileID: 3115545208649521063}
+  Rigidbody2D: {fileID: 3115545208649521062}
 --- !u!70 &3115545208649521063
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -122,19 +138,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3036570629957418199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3115545208649521065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9176ae4a3ca74fdc955305ac6e0742cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Transform: {fileID: 3115545208649521058}
-  SpriteRenderer: {fileID: 3115545208649521061}
-  Collider2D: {fileID: 3115545208649521063}
-  Rigidbody2D: {fileID: 3115545208649521062}

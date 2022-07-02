@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Game.Config;
+﻿using Game.Config;
 using Game.Controllers;
 using Game.View;
 using UnityEngine;
@@ -9,79 +8,117 @@ namespace Game
     public class GameStarter : MonoBehaviour
     {
         [SerializeField] private int _animationSpeed = 15;
-
-        [Header("Player")] [SerializeField] private LevelObjectView _playerView;
-
-        private SpriteAnimationConfig _playerConfig;
+        
+        
+        
+        [Header("Player")]
+        [SerializeField] private PlayerView _playerView;
+        
         private SpriteAnimatorController _playerAnimator;
-        private PlayerController _playerController;
-
-        [Header("Coins")] 
-        [SerializeField] private List<LevelObjectView> _coinViews;
-
-        private SpriteAnimationConfig _coinConfig;
-        private SpriteAnimatorController _coinAnimator;
-
-
-        [Header("Cannon")] 
-        [SerializeField] private CannonView _cannonView;
-
-        [Header("DeathZone")] 
-        [SerializeField] private List<LevelObjectView> _deathZonesView;
+        private SpriteAnimationConfig _playerConfig;
+        
+        [Header("Enemy")]
+        [SerializeField] private EnemyView _enemyView;
+        
+        private SpriteAnimatorController _enemyAnimator;
+        private SpriteAnimationConfig _enemyConfig;
+        
+        [Header("Fireball")]
+        [SerializeField] private FireballView _fireballView;
+        
+        private SpriteAnimatorController _fireballAnimator;
+        private SpriteAnimationConfig _fireballConfig;
+        
+        [Header("Explosion")]
+        [SerializeField] private ExplosionView _explosionView;
+        
+        private SpriteAnimatorController _explosionAnimator;
+        private SpriteAnimationConfig _explosionConfig;
 
         [Header("Parallax")] 
         [SerializeField] private GameObject _backGround;
-
         [SerializeField] private GameObject _midleGround;
         [SerializeField] private GameObject _frontGround;
-
+        
         private Camera _camera;
         private ParallaxController _parallaxController;
-        private DeathZoneController _deathZoneController;
-        private AimingMuzzleController _aimingMuzzleController;
-        private CoinsController _coinsController;
-
+        
 
         private void Awake()
         {
             _camera = Camera.main;
             _parallaxController = new ParallaxController(_camera, _backGround, _midleGround, _frontGround);
-
+            
+            
             PlayerInitialization();
-            CoinsInitialization();
-
-            _aimingMuzzleController = new AimingMuzzleController(_cannonView.MuzzleTransform, _playerView.Transform);
-            _deathZoneController = new DeathZoneController(_playerView, _deathZonesView);
+            EnemyInitialization();
+            FireballInitialization();
+            ExplosionInitialization();
         }
 
         private void Update()
         {
             _parallaxController.Update();
-
-            _playerAnimator.Update();
             
-            _coinAnimator.Update();
-
-            _aimingMuzzleController.Update();
+            PlayerMoveAnimation();
+            AnimatorsUpdate();
         }
 
-        private void FixedUpdate()
+        private void PlayerMoveAnimation()
         {
-            _playerController.FixedUpdate();
+            if (Input.GetKey(KeyCode.W))
+            {
+                _playerAnimator.StopAnimation(_playerView.SpriteRenderer);
+                _playerAnimator.StartAnimation(_playerView.SpriteRenderer, AnimState.Run, true, _animationSpeed);
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                _playerAnimator.StopAnimation(_playerView.SpriteRenderer);
+                _playerAnimator.StartAnimation(_playerView.SpriteRenderer, AnimState.Idle, true, _animationSpeed);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _playerAnimator.StopAnimation(_playerView.SpriteRenderer);
+                _playerAnimator.StartAnimation(_playerView.SpriteRenderer, AnimState.Jump, false, _animationSpeed);
+            }
+        }
+
+        private void AnimatorsUpdate()
+        {
+            _playerAnimator.Update();
+            _enemyAnimator.Update();
+            _fireballAnimator.Update();
+            _explosionAnimator.Update();
+        }
+
+        private void ExplosionInitialization()
+        {
+            _explosionConfig = Resources.Load<SpriteAnimationConfig>("ExplosionAnimatorConfigs");
+            _explosionAnimator = new SpriteAnimatorController(_explosionConfig);
+            _explosionAnimator.StartAnimation(_explosionView.SpriteRenderer, AnimState.Run, true, _animationSpeed);
         }
 
         private void PlayerInitialization()
         {
             _playerConfig = Resources.Load<SpriteAnimationConfig>("PlayerAnimatorConfigs");
             _playerAnimator = new SpriteAnimatorController(_playerConfig);
-            _playerController = new PlayerController(_playerView, _playerAnimator);
+            _playerAnimator.StartAnimation(_playerView.SpriteRenderer, AnimState.Idle, true, _animationSpeed);
         }
 
-        private void CoinsInitialization()
+        private void EnemyInitialization()
         {
-            _coinConfig = Resources.Load<SpriteAnimationConfig>("CoinAnimatorConfigs");
-            _coinAnimator = new SpriteAnimatorController(_coinConfig);
-            _coinsController = new CoinsController(_playerView, _coinViews, _coinAnimator);
+            _enemyConfig = Resources.Load<SpriteAnimationConfig>("EnemyAnimatorConfigs");
+            _enemyAnimator = new SpriteAnimatorController(_enemyConfig);
+            _enemyAnimator.StartAnimation(_enemyView.SpriteRenderer, AnimState.Run, true, _animationSpeed);
+        }
+
+        private void FireballInitialization()
+        {
+            _fireballConfig = Resources.Load<SpriteAnimationConfig>("FireballAnimatorConfigs");
+            _fireballAnimator = new SpriteAnimatorController(_fireballConfig);
+            _fireballAnimator.StartAnimation(_fireballView.SpriteRenderer, AnimState.Run, true, _animationSpeed);
         }
     }
 }

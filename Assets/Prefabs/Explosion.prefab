@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5753237241334570782}
-  - component: {fileID: 819273627235181014}
+  - component: {fileID: 3917483444032385749}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &819273627235181014
+--- !u!114 &3917483444032385749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,10 +123,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4073942130289885725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9176ae4a3ca74fdc955305ac6e0742cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d187e6bc0154df6b2205c7cd8eacf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Transform: {fileID: 5753237241334570782}
   SpriteRenderer: {fileID: 6449747347672898577}
-  Collider2D: {fileID: 0}
-  Rigidbody2D: {fileID: 0}
