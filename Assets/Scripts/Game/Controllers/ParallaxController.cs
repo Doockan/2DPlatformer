@@ -24,7 +24,7 @@ namespace Game.Controllers
 
             _cameraStartPosition = _camera.position;
 
-            _coef = new Vector2(0.03f, 0.03f);
+            _coef = new Vector2(0.3f, 0.3f);
 
             _midleGroundTextureSizeX = GetTextureSize(midleGround);
             _frontGroundTextureSizeX = GetTextureSize(frontGround);
@@ -34,7 +34,7 @@ namespace Game.Controllers
         {
             Vector3 deltaMovement = _camera.position - _cameraStartPosition;
 
-            _backGround.position = new Vector3(_camera.position.x, _camera.position.y);
+            _backGround.position = new Vector3(_camera.position.x, _backGround.position.y);
             _midleGround.position += new Vector3(deltaMovement.x * _coef.x, deltaMovement.y * _coef.y);
             _frontGround.position += new Vector3(deltaMovement.x * -_coef.x, deltaMovement.y * -_coef.y);
             _cameraStartPosition = _camera.position;
